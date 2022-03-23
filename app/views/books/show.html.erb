@@ -1,0 +1,17 @@
+<%= flash[:updateb] %>
+<%= render 'usernewbook', newbook: @newbook, user: @user %>
+
+<h2>Book detail</h2>
+<h3>Title</h3>
+<h3>Opinion</h3>
+<div>
+  <p><%= @book.title %></p>
+  <p><%= @book.body %></p>
+  <p>投稿ユーザー画像：<%= image_tag @book.user.get_profile_image(100,100) %></p>
+  <p><%= @book.user.name %></p>
+  <% if @book.user == current_user %>
+    <%= link_to "Destroy", book_path(@book), method: :delete %>
+    <%= link_to "edit", edit_book_path(@book.id) %>
+  <% end %>
+
+</div>

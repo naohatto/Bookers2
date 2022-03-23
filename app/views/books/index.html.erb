@@ -1,0 +1,27 @@
+<div class="container">
+<%= flash[:create] %>
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>errors prohibited this obj from being saved:
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+  <div class="row">
+    <%= render 'usernewbook', newbook: @book, user: @user %>
+  </div>
+  <% @books.each do |book| %>
+    <div>
+      <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
+      <p>
+        <%= link_to book_path(book.id) do %>
+          <%= book.title %>
+        <% end %>
+      </p>
+      <p><%= book.body %></p>
+    </div>
+  <% end %>
+  <%= paginate @books %>
+</div>
