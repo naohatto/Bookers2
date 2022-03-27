@@ -2,19 +2,19 @@
 <html>
   <head>
     <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-          <a class="navbar-brand p-3" href="/">Bookers2</a>
+          <a class="navbar-brand" href="/"><span>Bookers</span></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,31 +22,15 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
 
-              <li>
-                <%= link_to 'Home', user_path(current_user.id) %>
-              </li>
-              <li>
-                <%= link_to 'Users', users_path %>
-              </li>
-              <li>
-                <%= link_to 'Books', books_path %>
-              </li>
-              <li>
-                <%= link_to "Log out", destroy_user_session_path, method: :delete %>
-              </li>
+              <li><%= link_to "Home", user_path(current_user.id) %>
+              <li><a class href="/users"> Users</a></li>
+              <li><a class href="/books"> Books</a></li>
+              <li><a class rel="nofollow" data-method="delete" href="/users/sign_out"> Log out</a></li>
             <% else %>
-              <li>
-                <%= link_to "Home", root_path %>
-              </li>
-              <li>
-                <%= link_to "About", about_path %>
-              </li>
-              <li>
-                <%= link_to "Sign up", new_user_registration_path %>
-              </li>
-              <li>
-                <%= link_to "Log in", new_user_session_path %>
-              </li>
+              <li><a class href="/"> Home</a></li>
+              <li><a class href="/home/about"> About</a></li>
+              <li><a class href="/users/sign_up"> Sign up</a></li>
+              <li><a class href="/users/sign_in"> Log in</a></li>
             <% end %>
             </ul>
           </div>
@@ -54,5 +38,14 @@
       </nav>
     </header>
     <%= yield %>
+    <footer>
+      <div class="container mt-5">
+        <div class="row">
+          <div class="mx-auto">
+            <p>CopyRight Infratop.inc</p>
+          </div>
+        </div>
+      </div>
+    </footer>
   </body>
 </html>

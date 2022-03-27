@@ -1,20 +1,43 @@
-<%= flash[:login] %>
-<%= flash[:updateu] %>
-<%= render 'books/usernewbook', newbook: @book, user: @user %>
+<body>
+  <main>
+    <%= render 'books/usernewbook', newbook: @book, user: @user %>
+    <%= flash[:login] %>
+    <%= flash[:updateu] %>
 
-<% @books.each do |book| %>
-<div>
-  <%= link_to book_path(book.id) do %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+      <table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-  <% end %>
-  <p>投稿ユーザー画像：<%= image_tag book.user.get_profile_image(100,100) %></p>
-  <p>
-    <%= link_to book_path(book.id) do %>
-      <%= book.title %>
+    <% @books.each do |book| %>
+
+    <div>
+      <%= link_to book_path(book.id) do %>
+
+      <% end %>
+      <p>投稿ユーザー画像：
+        <%= link_to user_path(book.user.id) do %>
+          <%= image_tag book.user.get_profile_image(100,100) %></p>
+        <% end %>
+      <p>
+        <%= link_to book_path(book.id) do %>
+          <%= book.title %>
+        <% end %>
+      </p>
+      <p>Opinion：<%= book.body %></p>
+      <p>ユーザーネーム：<%= book.user.name %></p>
+    </div>
     <% end %>
-  </p>
-  <p>Opinion：<%= book.body %></p>
-  <p>ユーザーネーム：<%= book.user.name %></p>
-</div>
-<% end %>
-<%= paginate @books %>
+    <%= paginate @books %>
+  </main>
+</body>
