@@ -22,20 +22,51 @@
             <ul class="navbar-nav ml-auto">
               <% if user_signed_in? %>
 
-              <li><%= link_to "Home", user_path(current_user.id) %>
-              <li><a class href="/users"> Users</a></li>
-              <li><a class href="/books"> Books</a></li>
-              <li><a class rel="nofollow" data-method="delete" href="/users/sign_out"> Log out</a></li>
+              <li>
+                <%= link_to(user_path(current_user.id), class:"text-light") do %>
+                  <i class="fas fa-home"></i> Home
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(users_path, class:"text-light") do %>
+                  <i class="fas fa-users"></i> Users
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(books_path, class:"text-light") do %>
+                  <i class="fas fa-book-open"></i> Books
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(destroy_user_session_path, method: :delete, class:"text-light") do %>
+                  <i class="fas fa-sign-out-alt"></i> Log out
+                <% end %>
+              </li>
             <% else %>
-              <li><a class href="/"> Home</a></li>
-              <li><a class href="/home/about"> About</a></li>
-              <li><a class href="/users/sign_up"> Sign up</a></li>
-              <li><a class href="/users/sign_in"> Log in</a></li>
+              <li>
+                <%= link_to(root_path, class:"text-light") do %>
+                  <i class="fas fa-home"></i> Home
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(about_path, class:"text-light") do %>
+                  <i class="fas fa-link"></i> About
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(new_user_registration_path, class:"text-light") do %>
+                  <i class="fas fa-user-plus"></i> Sign up
+                <% end %>
+              </li>
+              <li>
+                <%= link_to(user_session_path, class:"text-light") do %>
+                  <i class="fas fa-sign-in-alt"></i> Log in
+                <% end %>
+              </li>
             <% end %>
             </ul>
           </div>
         </div>
-      </nav>
     </header>
     <%= yield %>
     <footer>

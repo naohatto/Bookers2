@@ -1,25 +1,36 @@
-<%= flash[:create] %>
-<%= flash[:updateb] %>
-<%= render 'usernewbook', newbook: @newbook, user: @user %>
-
-<h2>Book detail</h2>
-<h3>Title</h3>
-<h3>Opinion</h3>
-<div>
-  <p><%= @book.title %></p>
-  <p><%= @book.body %></p>
-  <p>投稿ユーザー画像：
-    <%= link_to user_path(@book.user.id) do %>
-      <%= image_tag @book.user.get_profile_image(100,100) %></p>
-    <% end %>
-  <p>
-    <%= link_to user_path(@book.user.id) do %>
-      <%= @book.user.name %>
-    <% end %>
-  </p>
-  <% if @book.user == current_user %>
-    <p class="btn btn-success"><%= link_to "Edit", edit_book_path(@book.id.to_s) %></p>
-    <p class="btn btn-danger"><%= link_to "Destroy", book_path(@book), method: :delete %></p>
-  <% end %>
-
-</div>
+<main>
+  <%= flash[:create] %>
+  <%= flash[:updateb] %>
+  <div class="container">
+    <div class="row">
+      <%= render 'usernewbook', newbook: @newbook, user: @user %>
+      <div class="col-md-8 offset-md-1">
+        <h2>Book detail</h2>
+        <table class="table">
+          <tbody>
+            <tr>
+              <td>
+                <%= link_to user_path(@book.user.id) do %>
+                  <%= image_tag @book.user.get_profile_image(100,100) %></p>
+                  <%= @book.user.name %>
+                <% end %>
+              </td>
+              <td>
+                <%= link_to book_path(@book) do %>
+                  <%= @book.title %>
+                <% end %>
+              </td>
+              <td>
+                <%= @book.body %>
+              </td>
+              <% if @book.user == current_user %>
+              <td><div class="btn btn-success"><%= link_to "Edit", edit_book_path(@book.id.to_s) %></div></td>
+              <td><div class="btn btn-danger"><%= link_to "Destroy", book_path(@book), method: :delete %></div></td>
+              <% end %>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
